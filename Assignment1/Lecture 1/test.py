@@ -1,0 +1,2 @@
+c = []
+print(type(c))
