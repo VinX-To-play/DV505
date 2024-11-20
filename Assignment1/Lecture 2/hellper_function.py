@@ -5,7 +5,7 @@ import random
 import time
 
 start = 200
-stop = 701
+stop = 601
 step = 50
 
 Savefile = "time.data"
@@ -14,12 +14,20 @@ def time_taker(start, stop, step):
     time_data = []
     for i in range(start, stop, step):
         lst = []
-        for _ in range(i):
-            lst.append(random.randint(-100, 100))
-        begin_time = time.time()
-        sum_3_brut(lst)
-        time_data.append((time.time() - begin_time))
-        print(time_data[len(time_data) - 1])
+        for _ in range(5):
+            temp_time = 0
+            for _ in range(i):
+                lst.append(random.randint(-100, 100))
+            begin_time = time.time()
+            sum_3_brut(lst)
+            test_time = ((time.time() - begin_time))
+            temp_time += test_time
+            print(test_time, 'run')
+            test_time = 0
+            lst = []
+        time_data.append(temp_time / 5)
+        print(time_data[len(time_data) - 1], 'averig')
+        
 
     saving_func(time_data)
     return time_data
@@ -42,7 +50,7 @@ def lin_graph(start, stop, step, time_data):
     x_axis = [*range(start, stop, step)]
     plt.xlabel(f"iterration from {start} to {stop} in {step} distanc")
     plt.ylabel("time")
-    plt.plot(x_axis, time_data)
+    plt.plot(x_axis, time_data, '+')
     plt.show()
 
 
@@ -54,13 +62,13 @@ def log_graph(start, stop, step, time_data):
     logY = [math.log(y) for y in time_data]
     for i in range(len(time_data)):
         print(logY[i], time_data[i])
-    plt.plot(logX, logY)
+    plt.plot(logX, logY, '+')
     plt.show()
 
 
 
-#time_data = read_funk(Savefile)
-time_data = time_taker(start, stop, step)
+time_data = read_funk(Savefile)
+#time_data = time_taker(start, stop, step)
 print(time_data)
 saving_func(time_data)
 lin_graph(start, stop, step,time_data)
