@@ -5,7 +5,7 @@ def sum_3_brut(lst, s = 0):
         Nx = lst[x]
         for y in range(x + 1, len(lst) - 1):
             Ny = lst[y]
-            for z in range(x + 2, len(lst)):
+            for z in range(y + 1, len(lst)):
                 Nz = lst[z]
                 if (Nx + Ny + Nz) == s :
                     if Nx >= Ny and Nx >= Nz:

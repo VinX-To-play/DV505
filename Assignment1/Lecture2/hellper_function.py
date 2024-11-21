@@ -4,9 +4,10 @@ from three_sum import *
 import random
 import time
 
-start = 200
-stop = 601
+start = 300
+stop = 701
 step = 50
+prsison = 5
 
 Savefile = "time.data"
 
@@ -14,10 +15,10 @@ def time_taker(start, stop, step):
     time_data = []
     for i in range(start, stop, step):
         lst = []
-        for _ in range(5):
-            temp_time = 0
+        temp_time = 0
+        for _ in range(prsison):
             for _ in range(i):
-                lst.append(random.randint(-100, 100))
+                lst.append(random.randint(-10 * i, 10 * i))
             begin_time = time.time()
             sum_3_brut(lst)
             test_time = ((time.time() - begin_time))
@@ -25,7 +26,7 @@ def time_taker(start, stop, step):
             print(test_time, 'run')
             test_time = 0
             lst = []
-        time_data.append(temp_time / 5)
+        time_data.append(temp_time / prsison)
         print(time_data[len(time_data) - 1], 'averig')
         
 
@@ -36,6 +37,18 @@ def saving_func(time_data):
     with open(Savefile, "wt") as data:
         for i in range(len(time_data)):
             data.write(f"{str(time_data[i])} \n")
+
+def lin_reg(x,y):
+    n = len(x)
+    Sx = sum(x)
+    Sy = sum(y)
+    Sxx = sum([(e ** 2) for e in x])
+    Sxy = 0 
+    for i in range(n):
+        Sxy += x[i] * y[i]
+    m = ((Sxx * Sy) - (Sx * Sxy)) / ((n * Sxx) - (Sx * Sx))
+    k = ((n * Sxy) - (Sx * Sy)) / ((n * Sxx) - (Sx * Sx))
+    return m, k
 
 
 def read_funk(Savefile):
@@ -60,15 +73,17 @@ def log_graph(start, stop, step, time_data):
     plt.ylabel("time in log")
     logX = [math.log(x) for x in x_axis]
     logY = [math.log(y) for y in time_data]
-    for i in range(len(time_data)):
-        print(logY[i], time_data[i])
+    m , k = lin_reg(logX, logY)
+    lineY = [(m + x * k) for x in logX]
+    plt.title(f'k = {k}')
     plt.plot(logX, logY, '+')
+    plt.plot(logX, lineY, '-')
     plt.show()
 
 
 
-time_data = read_funk(Savefile)
-#time_data = time_taker(start, stop, step)
+#time_data = read_funk(Savefile)
+time_data = time_taker(start, stop, step)
 print(time_data)
 saving_func(time_data)
 lin_graph(start, stop, step,time_data)
