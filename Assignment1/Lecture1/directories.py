@@ -1,6 +1,6 @@
 import os
 
-path = '/mnt/TB1/Torrent/'
+path = '/home/vincentl/Documents/LNU/DV505/'
 
 def print_directory(path):
     try:

@@ -3,13 +3,14 @@ import matplotlib.pyplot as plt
 from three_sum import *
 import random
 import time
+from lin_reg import *
 
-start = 300
+start = 100
 stop = 701
-step = 50
-prsison = 5
+step = 25
+prsison = 1
 
-Savefile = "time.data"
+Savefile = "Assignment1/Lecture2/data/time_2.data"
 
 def time_taker(start, stop, step):
     time_data = []
@@ -38,21 +39,8 @@ def saving_func(time_data):
         for i in range(len(time_data)):
             data.write(f"{str(time_data[i])} \n")
 
-def lin_reg(x,y):
-    n = len(x)
-    Sx = sum(x)
-    Sy = sum(y)
-    Sxx = sum([(e ** 2) for e in x])
-    Sxy = 0 
-    for i in range(n):
-        Sxy += x[i] * y[i]
-    m = ((Sxx * Sy) - (Sx * Sxy)) / ((n * Sxx) - (Sx * Sx))
-    k = ((n * Sxy) - (Sx * Sy)) / ((n * Sxx) - (Sx * Sx))
-    return m, k
-
-
 def read_funk(Savefile):
-    with open("time.data", "r") as file:
+    with open(Savefile, "r") as file:
         time_data = []
         data = file.read()
         for i in data.split():
