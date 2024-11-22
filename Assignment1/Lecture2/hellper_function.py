@@ -8,7 +8,7 @@ from lin_reg import *
 start = 100
 stop = 701
 step = 25
-prsison = 1
+prsison = 5
 
 Savefile = "Assignment1/Lecture2/data/time_2.data"
 
