@@ -1,10 +1,3 @@
-import random
-import math
-
-lst = [1]
-for i in range(50):
-    lst.append(random.randint(-10 * i , 10 * i))
-
 #O(n^2) Algoritems
 # Selection sort
 def selection_sort(lst):
@@ -126,7 +119,3 @@ def quick_median_sort(lst:list):
             pivit_in_lst.append(e)
 
     return quick_sort(left) + pivit_in_lst + quick_sort(right)   
-
-
-print(lst)
-print(quick_median_sort(lst))
