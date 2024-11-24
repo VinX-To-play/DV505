@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import math
 from lin_reg import *
 
+# n^2 test values
 start = 700
 stop = 6001
 step = 350
@@ -68,4 +69,31 @@ def vis_n_2():
     plt.plot(logX,lineY_b,'-',color='r')
     plt.legend()
     plt.show()
-vis_n_2()
+
+# n*log(n) test values
+start = 100000
+stop = 5000001
+step = 100000
+prsison = 5
+with_merge_sort = False
+
+def vis_nlogn():
+    x_axis = [*range(start, stop, step)]
+    
+    if with_merge_sort == True:
+        merge_time = test(sa.merge_sort)
+        plt.plot(x_axis, median_time, '+',color='r', label='median quicksort')
+    
+    quick_time = test(sa.quick_sort)
+    median_time = test(sa.quick_median_sort)
+    
+    plt.xlabel(f"iterration from {start} to {stop} in {step} distanc")
+    plt.ylabel("time")
+    plt.plot(x_axis, merge_time, '+',color='b', label='merge sort')
+    plt.plot(x_axis, quick_time, '+',color='g', label='quick sort')
+    plt.legend()
+    plt.show()
+
+
+vis_nlogn()
+#vis_n_2()
