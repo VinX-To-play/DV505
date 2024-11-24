@@ -70,6 +70,8 @@ def vis_n_2():
     plt.legend()
     plt.show()
 
+vis_n_2()
+
 # n*log(n) test values
 start = 100000
 stop = 5000001
@@ -96,4 +98,3 @@ def vis_nlogn():
 
 
 vis_nlogn()
-#vis_n_2()
