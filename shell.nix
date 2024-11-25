@@ -7,10 +7,10 @@ in pkgs.mkShell {
       python-pkgs.matplotlib
       ]))
   ];
-  }
 
-shellHook =
-  ''
-    git config user.email "cl224hx@student.lnu.se"
-    git config user.name "Vincent Lundborg"
-  '';
+  shellHook =
+    ''
+      git config user.email "cl224hx@student.lnu.se"
+      git config user.name "Vincent Lundborg"
+    '';
+  }
